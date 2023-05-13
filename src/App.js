@@ -13,39 +13,71 @@ const imagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
 export default function App() {
   
-  const [erros, setErros] = useState(6)
+  const [erros, setErros] = useState(0)
   const [palavraEscolhida, setPalavraEscolhida] = useState([])
   const [palavraJogo, setPalavraJogo] = useState([])
+  const [letrasClicadas, setLetrasClicadas] = useState (alfabeto)
 
   function iniciarJogo(){
     setErros(0);
+    setLetrasClicadas([]);
     escolherPalavra();
   }
 
   function escolherPalavra(){
     const i = Math.floor(Math.random() * palavras.length);
     const palavra = palavras[i];
-    console.log(palavra)
 
     const palavraSorteada = palavra.split("")
-    console.log(palavraSorteada)
+    
     setPalavraEscolhida (palavraSorteada);
 
     let traco = []
     palavraSorteada.forEach(() => traco.push(" _"))
     setPalavraJogo (traco) 
   }
+
+  function letraEscolhida(letra) {
+      setLetrasClicadas ([...letrasClicadas, letra])
+
+      if (palavraEscolhida.includes(letra)){
+        letraCerta(letra)
+      } else {
+        letraErrada(letra)
+      }
+
+  }
+
+  function letraCerta(letra) {
+    
+  }
+
+  function letraErrada(letra) {
+    const erroTotal = erros + 1
+    setErros(erroTotal)
+  }
+
+
   return (
     <div className="container">
 
       <div className="container-jogo">
         <img src={imagens[erros]} alt="forca" />
-        <button onClick={iniciarJogo} className="escolher-palavra"> Escolher Palavra </button>
-        <h1> {palavraJogo}</h1>
-
+        <div className="container-palavra">
+          <button onClick={iniciarJogo} className="escolher-palavra"> Escolher Palavra </button>
+          <h1> {palavraJogo}</h1>
+        </div>
       </div>
       <div className="container-letras">
-        {alfabeto.map((letra) => <button key={letra} disabled={true}>{letra}</button>)}
+        {alfabeto.map((letra) => (
+        <button 
+          key={letra} 
+          disabled={letrasClicadas.includes(letra)}
+          onClick = {() => letraEscolhida(letra)}
+          >
+            {letra}
+            </button>
+        ))}
       </div>
       
     </div>

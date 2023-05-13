@@ -1,0 +1,49 @@
+body{
+    background-color: antiquewhite;
+}
+
+.container{
+    width: 1550px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container-jogo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container-palavra{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.container-palavra button{
+height: 60px;
+width: 200px;
+border-radius: 8px;
+background-color: #27AE60;
+margin-bottom: 350px;
+}
+
+.container-letras{
+    width: 950px;
+    height: 150px;
+    margin: 60px 150px 20px 350px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container-letras button {
+    width: 60px;
+    height: 60px;
+    margin: 6px;
+    border-radius: 3px;
+    border-color: #7AA7C7;
+    background-color: #E1ECF4;
+}
