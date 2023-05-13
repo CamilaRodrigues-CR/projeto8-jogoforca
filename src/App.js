@@ -14,6 +14,8 @@ const imagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 export default function App() {
   
   const [erros, setErros] = useState(6)
+  const [palavraEscolhida, setPalavraEscolhida] = useState([])
+  const [palavraJogo, setPalavraJogo] = useState([])
 
   function iniciarJogo(){
     setErros(0);
@@ -24,6 +26,14 @@ export default function App() {
     const i = Math.floor(Math.random() * palavras.length);
     const palavra = palavras[i];
     console.log(palavra)
+
+    const palavraSorteada = palavra.split("")
+    console.log(palavraSorteada)
+    setPalavraEscolhida (palavraSorteada);
+
+    let traco = []
+    palavraSorteada.forEach(() => traco.push(" _"))
+    setPalavraJogo (traco) 
   }
   return (
     <div className="container">
@@ -31,7 +41,7 @@ export default function App() {
       <div className="container-jogo">
         <img src={imagens[erros]} alt="forca" />
         <button onClick={iniciarJogo} className="escolher-palavra"> Escolher Palavra </button>
-        <h1> _ _ _ _ _ _</h1>
+        <h1> {palavraJogo}</h1>
 
       </div>
       <div className="container-letras">
