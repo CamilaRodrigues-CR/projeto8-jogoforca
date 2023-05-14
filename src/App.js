@@ -16,17 +16,29 @@ export default function App() {
   const [erros, setErros] = useState(0)
   const [palavraEscolhida, setPalavraEscolhida] = useState([])
   const [palavraJogo, setPalavraJogo] = useState([])
-  const [letrasClicadas, setLetrasClicadas] = useState (alfabeto)
+  const [letrasClicadas, setLetrasClicadas] = useState(alfabeto)
+  const [cor, setCor] = useState("preto")
 
   function iniciarJogo(){
     setErros(0);
     setLetrasClicadas([]);
     escolherPalavra();
+    setCor("preto")
   }
+
+  function jogoAcabou (){
+    setPalavraJogo(palavraEscolhida);
+    setLetrasClicadas(alfabeto);
+
+  }
+
+
+  //Para que eu consiga sortear a palavra preciso de uma
 
   function escolherPalavra(){
     const i = Math.floor(Math.random() * palavras.length);
     const palavra = palavras[i];
+    console.log(palavra)
 
     const palavraSorteada = palavra.split("")
     
@@ -49,12 +61,31 @@ export default function App() {
   }
 
   function letraCerta(letra) {
-    
+    const novoAcerto = [...palavraJogo]
+
+    palavraEscolhida.forEach((l, i) => {
+      if (l === letra) {
+      novoAcerto[i] = letra
+    }
+    })
+
+    setPalavraJogo(novoAcerto)
+
+    if (!novoAcerto.includes(" _")) {
+      setCor("verde")
+      jogoAcabou()
+    }
   }
 
   function letraErrada(letra) {
     const erroTotal = erros + 1
     setErros(erroTotal)
+
+    if (erroTotal === 6){
+      setCor("vermelha")
+      jogoAcabou()
+
+    }
   }
 
 
@@ -65,7 +96,7 @@ export default function App() {
         <img src={imagens[erros]} alt="forca" />
         <div className="container-palavra">
           <button onClick={iniciarJogo} className="escolher-palavra"> Escolher Palavra </button>
-          <h1> {palavraJogo}</h1>
+          <h1 className={cor}> {palavraJogo}</h1>
         </div>
       </div>
       <div className="container-letras">
