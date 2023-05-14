@@ -1,3 +1,4 @@
+import { useState } from "react";
 import palavras from "./palavras";
 import alfabeto from "./letras";
 import forca0 from "./assets/forca0.png";
@@ -7,7 +8,6 @@ import forca3 from "./assets/forca3.png";
 import forca4 from "./assets/forca4.png";
 import forca5 from "./assets/forca5.png";
 import forca6 from "./assets/forca6.png";
-import { useState } from "react";
 
 const imagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
@@ -19,44 +19,42 @@ export default function App() {
   const [letrasClicadas, setLetrasClicadas] = useState(alfabeto)
   const [cor, setCor] = useState("preto")
 
-  function iniciarJogo(){
+  function iniciarJogo() {
     setErros(0);
     setLetrasClicadas([]);
     escolherPalavra();
     setCor("preto")
   }
 
-  function jogoAcabou (){
+  function jogoAcabou() {
     setPalavraJogo(palavraEscolhida);
     setLetrasClicadas(alfabeto);
 
   }
 
 
-  //Para que eu consiga sortear a palavra preciso de uma
-
-  function escolherPalavra(){
+  function escolherPalavra() {
     const i = Math.floor(Math.random() * palavras.length);
     const palavra = palavras[i];
     console.log(palavra)
 
     const palavraSorteada = palavra.split("")
-    
-    setPalavraEscolhida (palavraSorteada);
+
+    setPalavraEscolhida(palavraSorteada);
 
     let traco = []
     palavraSorteada.forEach(() => traco.push(" _"))
-    setPalavraJogo (traco) 
+    setPalavraJogo(traco)
   }
 
   function letraEscolhida(letra) {
-      setLetrasClicadas ([...letrasClicadas, letra])
+    setLetrasClicadas([...letrasClicadas, letra])
 
-      if (palavraEscolhida.includes(letra)){
-        letraCerta(letra)
-      } else {
-        letraErrada(letra)
-      }
+    if (palavraEscolhida.includes(letra)) {
+      letraCerta(letra)
+    } else {
+      letraErrada(letra)
+    }
 
   }
 
@@ -65,8 +63,8 @@ export default function App() {
 
     palavraEscolhida.forEach((l, i) => {
       if (l === letra) {
-      novoAcerto[i] = letra
-    }
+        novoAcerto[i] = letra
+      }
     })
 
     setPalavraJogo(novoAcerto)
@@ -81,7 +79,7 @@ export default function App() {
     const erroTotal = erros + 1
     setErros(erroTotal)
 
-    if (erroTotal === 6){
+    if (erroTotal === 6) {
       setCor("vermelha")
       jogoAcabou()
 
@@ -101,18 +99,18 @@ export default function App() {
       </div>
       <div className="container-letras">
         {alfabeto.map((letra) => (
-        <button 
-          key={letra} 
-          disabled={letrasClicadas.includes(letra)}
-          onClick = {() => letraEscolhida(letra)}
+          <button
+            key={letra}
+            disabled={letrasClicadas.includes(letra)}
+            onClick={letraEscolhida}
           >
             {letra}
-            </button>
+          </button>
         ))}
       </div>
-      
+
     </div>
   );
 }
 
- 
+
