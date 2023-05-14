@@ -12,7 +12,7 @@ import forca6 from "./assets/forca6.png";
 const imagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
 export default function App() {
-  
+
   const [erros, setErros] = useState(0)
   const [palavraEscolhida, setPalavraEscolhida] = useState([])
   const [palavraJogo, setPalavraJogo] = useState([])
@@ -26,6 +26,7 @@ export default function App() {
     setCor("preto")
   }
 
+
   function jogoAcabou() {
     setPalavraJogo(palavraEscolhida);
     setLetrasClicadas(alfabeto);
@@ -36,7 +37,6 @@ export default function App() {
   function escolherPalavra() {
     const i = Math.floor(Math.random() * palavras.length);
     const palavra = palavras[i];
-    console.log(palavra)
 
     const palavraSorteada = palavra.split("")
 
@@ -79,11 +79,13 @@ export default function App() {
     const erroTotal = erros + 1
     setErros(erroTotal)
 
+
     if (erroTotal === 6) {
       setCor("vermelha")
       jogoAcabou()
 
     }
+
   }
 
 
@@ -102,7 +104,7 @@ export default function App() {
           <button
             key={letra}
             disabled={letrasClicadas.includes(letra)}
-            onClick={letraEscolhida}
+            onClick={() => letraEscolhida(letra)}
           >
             {letra}
           </button>
