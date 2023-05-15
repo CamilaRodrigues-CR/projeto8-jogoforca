@@ -93,10 +93,10 @@ export default function App() {
     <div className="container">
 
       <div className="container-jogo">
-        <img src={imagens[erros]} alt="forca" />
+        <img src={imagens[erros]} data-test="game-image" alt="forca" />
         <div className="container-palavra">
-          <button onClick={iniciarJogo} className="escolher-palavra"> Escolher Palavra </button>
-          <h1 className={cor}> {palavraJogo}</h1>
+          <button onClick={iniciarJogo} className="escolher-palavra" data-test="choose-word"> Escolher Palavra </button>
+          <h1 className={cor} data-test="word"> {palavraJogo}</h1>
         </div>
       </div>
       <div className="container-letras">
@@ -105,6 +105,7 @@ export default function App() {
             key={letra}
             disabled={letrasClicadas.includes(letra)}
             onClick={() => letraEscolhida(letra)}
+            data-test="letter"
           >
             {letra}
           </button>
